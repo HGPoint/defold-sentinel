@@ -432,7 +432,9 @@ end
 -- }
 -- sentry.capture_exception(err)
 function M.capture_exception(err)
-    assert(type(M.config) == "table", "initialize first")
+	if type(M.config) ~= "table" then
+		return
+	end
 	assert(type(err) == "table", "`capture_exception` expects a table.")
 
 	if not add_transaction(M.transactions) then
@@ -510,7 +512,9 @@ end
 --     callback = function(id, err) print(id, err) end
 -- })
 function M.capture_message(msg)
-    assert(type(M.config) == "table", "initialize first")
+	if type(M.config) ~= "table" then
+		return
+	end
 	assert(type(msg) == "table", "`capture_message` expects a table.")
 
 	if not add_transaction(M.transactions) then
